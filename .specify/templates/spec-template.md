@@ -77,6 +77,9 @@
 
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
+- If authentication is in scope: what happens on invalid password, invalid or
+  expired Google token, repeated failed sign-in attempts, duplicate account
+  mapping, and interrupted session state?
 
 ## Requirements *(mandatory)*
 
@@ -97,6 +100,16 @@
 
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+
+### Security & Auth Considerations *(mandatory when authentication changes)*
+
+- Supported identity methods MUST be explicitly listed.
+- Secret handling, password hashing, session or token lifecycle, and provider
+  verification rules MUST be described.
+- Abuse defenses such as rate limiting, account lockout strategy, or equivalent
+  controls MUST be specified when sign-in endpoints are introduced or changed.
+- Required audit or security events MUST be listed without exposing sensitive
+  secret material.
 
 ### Key Entities *(include if feature involves data)*
 

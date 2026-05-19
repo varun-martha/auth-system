@@ -18,17 +18,18 @@
   the iteration process.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]
+**Language/Version**: [e.g., TypeScript, Go, Python or NEEDS CLARIFICATION]
 
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]
+**Primary Dependencies**: [frameworks, auth libraries, database clients, or
+NEEDS CLARIFICATION]
 
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
+**Storage**: [e.g., PostgreSQL, MongoDB, MySQL, Redis, files or N/A]
 
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]
+**Testing**: [e.g., unit, integration, e2e tools or NEEDS CLARIFICATION]
 
 **Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
 
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]
+**Project Type**: [Default: web application]
 
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]
 
@@ -40,7 +41,15 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Approved identity scope is unchanged or explicitly expanded by the spec.
+- Password, Google SSO, session, and secret handling decisions are documented.
+- Server-side trust boundaries are identified for every auth decision point.
+- Required success, failure, and abuse-path tests are defined.
+- Audit logging, rate limiting, and other abuse defenses are accounted for.
+- The selected webapp architecture, storage choice, and operational controls
+  are explicit enough to implement without hidden assumptions.
+- Any deviation from the constitution is recorded in Complexity Tracking with a
+  concrete justification.
 
 ## Project Structure
 
@@ -87,8 +96,9 @@ backend/
 
 frontend/
 ├── src/
+│   ├── app/ or pages/
 │   ├── components/
-│   ├── pages/
+│   ├── styles/
 │   └── services/
 └── tests/
 
