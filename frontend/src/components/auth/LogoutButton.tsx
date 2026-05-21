@@ -11,7 +11,7 @@ export function LogoutButton() {
   async function handleLogout() {
     await logoutUser();
     setCachedUser(null);
-    router.push("/sign-in");
+    router.push("/");
     router.refresh();
   }
 

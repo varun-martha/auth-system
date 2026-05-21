@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { getFrontendEnv } from "@/lib/env";
 import { setCachedUser } from "@/lib/session";
 import { loginWithGoogle } from "@/services/auth/google-sign-in";
+import Script from "next/script";
 
 declare global {
   interface Window {
@@ -16,7 +17,7 @@ declare global {
             client_id: string;
             callback: (response: { credential?: string }) => void;
           }) => void;
-          renderButton: (container: HTMLElement, options: { theme: string; size: string }) => void;
+          renderButton: (container: HTMLElement, options: { theme: string; size: string; width?: string }) => void;
         };
       };
     };
@@ -25,16 +26,10 @@ declare global {
 
 export function GoogleSignInButton() {
   const router = useRouter();
-  const routerRef = useRef(router);
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { googleClientId } = getFrontendEnv();
   const buttonContainerRef = useRef<HTMLDivElement | null>(null);
-  const hasInitializedRef = useRef(false);
-
-  useEffect(() => {
-    routerRef.current = router;
-  }, [router]);
 
   const handleCredentialResponse = useCallback(async (response: { credential?: string }) => {
     if (!response?.credential) {
@@ -45,89 +40,70 @@ export function GoogleSignInButton() {
     try {
       const result = await loginWithGoogle(response.credential);
       setCachedUser(result.user);
-      routerRef.current.push(result.redirectTo);
-      routerRef.current.refresh();
+      router.push(result.redirectTo);
+      router.refresh();
     } catch (err) {
       console.error("Google sign-in error:", err);
       setError("Unable to complete Google sign-in. Please try again.");
     }
-  }, []);
+  }, [router]);
 
-  useEffect(() => {
-    const scriptSrc = "https://accounts.google.com/gsi/client";
+  const initGoogle = useCallback(() => {
+    if (!window.google?.accounts?.id || !buttonContainerRef.current) {
+      return;
+    }
 
-    function renderGoogleButton() {
-      if (!window.google?.accounts?.id || !buttonContainerRef.current) {
-        return false;
-      }
+    try {
+      window.google.accounts.id.initialize({
+        client_id: googleClientId,
+        callback: handleCredentialResponse
+      });
 
       window.google.accounts.id.renderButton(buttonContainerRef.current, {
         theme: "outline",
         size: "large"
       });
-      return true;
-    }
-
-    function initializeGoogleIdentity() {
-      if (hasInitializedRef.current || !window.google?.accounts?.id) {
-        return false;
-      }
-
-      window.google.accounts.id.initialize({
-        client_id: googleClientId,
-        callback: handleCredentialResponse
-      });
-      renderGoogleButton();
-      hasInitializedRef.current = true;
       setIsReady(true);
-      return true;
+      setError(null);
+    } catch (err) {
+      console.error("Error initializing Google Identity", err);
+      setError("Unable to load Google sign-in.");
     }
-
-    if (initializeGoogleIdentity()) {
-      return;
-    }
-
-    const existingScript = document.querySelector<HTMLScriptElement>(`script[src="${scriptSrc}"]`);
-    let mounted = true;
-
-    const handleLoad = () => {
-      if (!mounted) return;
-      if (!initializeGoogleIdentity()) {
-        setError("Unable to load Google sign-in.");
-      }
-    };
-
-    if (existingScript) {
-      existingScript.addEventListener("load", handleLoad);
-      if (existingScript.getAttribute("data-loaded") === "true") {
-        handleLoad();
-      }
-    } else {
-      const script = document.createElement("script");
-      script.src = scriptSrc;
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        script.setAttribute("data-loaded", "true");
-        handleLoad();
-      };
-      script.onerror = () => setError("Unable to load Google sign-in.");
-      document.body.appendChild(script);
-    }
-
-    return () => {
-      mounted = false;
-      if (existingScript) {
-        existingScript.removeEventListener("load", handleLoad);
-      }
-    };
   }, [googleClientId, handleCredentialResponse]);
+
+  useEffect(() => {
+    // If the script is already loaded when the component mounts
+    if (window.google?.accounts?.id) {
+      initGoogle();
+    } else {
+      // Poll for it in case the script is loaded but window.google isn't ready
+      const interval = setInterval(() => {
+        if (window.google?.accounts?.id) {
+          clearInterval(interval);
+          initGoogle();
+        }
+      }, 100);
+      
+      // Stop polling after 5 seconds
+      setTimeout(() => clearInterval(interval), 5000);
+      return () => clearInterval(interval);
+    }
+  }, [initGoogle]);
 
   return (
     <>
-      <div ref={buttonContainerRef} />
-      {!isReady && !error ? <p>Loading Google sign-in…</p> : null}
-      {error ? <p className="error-message" role="alert">{error}</p> : null}
+      <Script 
+        src="https://accounts.google.com/gsi/client" 
+        strategy="lazyOnload" 
+        onLoad={initGoogle}
+        onError={() => setError("Unable to load Google sign-in script.")}
+      />
+      <div 
+        ref={buttonContainerRef} 
+        style={{ width: "100%", display: "flex", justifyContent: "center", minHeight: "40px" }} 
+      />
+      {!isReady && !error ? <p style={{ textAlign: "center", color: "var(--text-muted)", fontSize: "0.9rem" }}>Loading Google sign-in…</p> : null}
+      {error ? <p className="auth-feedback" style={{ textAlign: "center", marginTop: "1rem" }} role="alert">{error}</p> : null}
     </>
   );
 }
