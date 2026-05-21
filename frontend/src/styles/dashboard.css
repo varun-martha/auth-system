@@ -1,0 +1,21 @@
+.dashboard-page {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.dashboard-shell {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--panel-background);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.5rem;
+}
+
+.dashboard-profile-card {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--surface-strong);
+}

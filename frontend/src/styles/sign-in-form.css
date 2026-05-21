@@ -1,0 +1,20 @@
+.auth-divider {
+  text-align: center;
+  color: var(--text-muted);
+  margin: 1rem 0;
+}
+
+.google-button {
+  width: 100%;
+  background: #fff;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.auth-banner {
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(194, 77, 44, 0.1);
+  color: var(--brand-accent-dark);
+  margin-bottom: 1rem;
+}
