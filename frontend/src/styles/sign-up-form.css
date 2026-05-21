@@ -3,35 +3,115 @@
   display: grid;
   place-items: center;
   padding: 2rem;
+  background: #050505;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-page::before, .auth-page::after {
+  content: '';
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  animation: liquidFloat 20s infinite linear;
+}
+
+.auth-page::before {
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.auth-page::after {
+  bottom: -20%;
+  right: -20%;
+  background: rgba(255, 255, 255, 0.02);
+  animation-direction: reverse;
+  animation-duration: 25s;
 }
 
 .auth-panel {
-  width: min(100%, 32rem);
-  padding: 2rem;
-  border-radius: 1.5rem;
+  width: min(100%, 420px);
+  padding: 3rem;
+  border-radius: 20px;
   background: var(--panel-background);
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 20px 60px rgba(31, 27, 22, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  z-index: 1;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-panel h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.auth-panel p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .auth-form {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .auth-field {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.5rem;
+}
+
+.auth-field span {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 .auth-field input {
-  padding: 0.9rem 1rem;
+  padding: 0.875rem 1rem;
   border: 1px solid var(--border-subtle);
-  border-radius: 0.85rem;
-  background: #fff;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.auth-field input::placeholder {
+  color: #52525b;
+}
+
+.auth-field input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 1px var(--border-focus);
 }
 
 .auth-feedback {
   min-height: 1.25rem;
-  color: var(--brand-accent-dark);
+  color: #ef4444; /* error red */
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
 }
