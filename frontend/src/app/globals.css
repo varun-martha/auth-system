@@ -1,18 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;700;800&display=swap');
 @import "../styles/landing-page.css";
 @import "../styles/sign-up-form.css";
 @import "../styles/sign-in-form.css";
 @import "../styles/dashboard.css";
 
 :root {
-  color-scheme: light;
-  --page-background: #f5f1e8;
-  --panel-background: #fffef9;
-  --text-primary: #1f1b16;
-  --text-muted: #60564a;
-  --brand-accent: #c24d2c;
-  --brand-accent-dark: #8a341d;
-  --border-subtle: #d5cbbb;
-  --surface-strong: #f0e7d6;
+  color-scheme: dark;
+  --page-background: #09090b; 
+  --panel-background: rgba(24, 24, 27, 0.4);
+  --text-primary: #fafafa;
+  --text-muted: #a1a1aa;
+  --brand-accent: #10b981; 
+  --brand-accent-dark: #059669;
+  --brand-accent-glow: rgba(16, 185, 129, 0.2);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.15);
+  --surface-strong: rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -23,9 +26,15 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Inter", sans-serif;
   background: var(--page-background);
   color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Outfit", sans-serif;
 }
 
 a {
@@ -36,4 +45,16 @@ a {
 button,
 input {
   font: inherit;
+}
+
+::selection {
+  background: var(--brand-accent-glow);
+  color: var(--brand-accent);
+}
+
+@keyframes liquidFloat {
+  0% { transform: rotate(0deg) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  33% { transform: rotate(120deg) scale(1.1); border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+  66% { transform: rotate(240deg) scale(0.9); border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+  100% { transform: rotate(360deg) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
 }
