@@ -21,6 +21,7 @@ declare global {
         };
       };
     };
+    __gsiInitialized?: boolean;
   }
 }
 
@@ -54,10 +55,13 @@ export function GoogleSignInButton() {
     }
 
     try {
-      window.google.accounts.id.initialize({
-        client_id: googleClientId,
-        callback: handleCredentialResponse
-      });
+      if (!window.__gsiInitialized) {
+        window.google.accounts.id.initialize({
+          client_id: googleClientId,
+          callback: handleCredentialResponse
+        });
+        window.__gsiInitialized = true;
+      }
 
       window.google.accounts.id.renderButton(buttonContainerRef.current, {
         theme: "outline",

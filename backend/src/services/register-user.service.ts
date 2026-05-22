@@ -26,7 +26,8 @@ export async function registerUser(input: {
   await createIdentityLink({
     userId: String(user._id),
     provider: "credentials",
-    providerEmail: user.email
+    providerEmail: user.email,
+    providerSubject: String(user._id)
   });
 
   const session = await createSessionForUser({
