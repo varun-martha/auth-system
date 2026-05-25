@@ -3,11 +3,15 @@ export function getFrontendEnv() {
   const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
   if (!apiBaseUrl) {
-    throw new Error("Missing required frontend environment variable: NEXT_PUBLIC_API_BASE_URL");
+    throw new Error(
+      "Missing required frontend environment variable: NEXT_PUBLIC_API_BASE_URL"
+    );
   }
 
   if (!googleClientId) {
-    throw new Error("Missing required frontend environment variable: NEXT_PUBLIC_GOOGLE_CLIENT_ID");
+    throw new Error(
+      "Missing required frontend environment variable: NEXT_PUBLIC_GOOGLE_CLIENT_ID"
+    );
   }
 
   return {
