@@ -1,4 +1,7 @@
-import { UserSessionModel, type UserSessionDocument } from "@/models/user-session.model.js";
+import {
+  UserSessionModel,
+  type UserSessionDocument
+} from "@/models/user-session.model.js";
 
 export async function createUserSession(input: {
   userId: string;
@@ -18,7 +21,9 @@ export async function createUserSession(input: {
   return createdSession.toObject() as UserSessionDocument;
 }
 
-export async function findActiveSessionByTokenHash(sessionTokenHash: string): Promise<UserSessionDocument | null> {
+export async function findActiveSessionByTokenHash(
+  sessionTokenHash: string
+): Promise<UserSessionDocument | null> {
   return UserSessionModel.findOne({
     sessionTokenHash,
     revokedAt: { $exists: false },

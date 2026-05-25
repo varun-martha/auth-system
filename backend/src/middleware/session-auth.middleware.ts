@@ -8,7 +8,11 @@ import { createAuthAuditEvent } from "@/repositories/auth-audit-event.repository
 import { getRequestMetadata } from "@/utils/audit-log.util.js";
 import { hashSessionToken } from "@/utils/session.util.js";
 
-export async function sessionAuthMiddleware(request: Request, response: Response, next: NextFunction): Promise<void> {
+export async function sessionAuthMiddleware(
+  request: Request,
+  response: Response,
+  next: NextFunction
+): Promise<void> {
   const rawSessionToken = request.cookies?.[env.SESSION_COOKIE_NAME];
 
   if (!rawSessionToken) {
@@ -19,7 +23,9 @@ export async function sessionAuthMiddleware(request: Request, response: Response
     return;
   }
 
-  const session = await findActiveSessionByTokenHash(hashSessionToken(rawSessionToken));
+  const session = await findActiveSessionByTokenHash(
+    hashSessionToken(rawSessionToken)
+  );
 
   if (!session) {
     await createAuthAuditEvent({

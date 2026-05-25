@@ -48,5 +48,10 @@ const authAuditEventSchema = new Schema(
   }
 );
 
-export type AuthAuditEventDocument = InferSchemaType<typeof authAuditEventSchema> & { _id: Types.ObjectId };
-export const AuthAuditEventModel = model("AuthAuditEvent", authAuditEventSchema);
+export type AuthAuditEventDocument = InferSchemaType<
+  typeof authAuditEventSchema
+> & { _id: Types.ObjectId };
+export const AuthAuditEventModel = model(
+  "AuthAuditEvent",
+  authAuditEventSchema
+);

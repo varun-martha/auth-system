@@ -5,7 +5,6 @@ const userAccountSchema = new Schema(
     username: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       minlength: 3,
       maxlength: 32
@@ -18,6 +17,10 @@ const userAccountSchema = new Schema(
       trim: true
     },
     passwordHash: {
+      type: String,
+      required: false
+    },
+    avatarUrl: {
       type: String,
       required: false
     },
@@ -37,5 +40,7 @@ const userAccountSchema = new Schema(
   }
 );
 
-export type UserAccountDocument = InferSchemaType<typeof userAccountSchema> & { _id: Types.ObjectId };
+export type UserAccountDocument = InferSchemaType<typeof userAccountSchema> & {
+  _id: Types.ObjectId;
+};
 export const UserAccountModel = model("UserAccount", userAccountSchema);

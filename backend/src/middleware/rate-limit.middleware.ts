@@ -4,7 +4,11 @@ const attemptStore = new Map<string, { count: number; expiresAt: number }>();
 const MAX_ATTEMPTS = 1000;
 const WINDOW_MS = 15 * 60 * 1000;
 
-export function authRateLimitMiddleware(request: Request, response: Response, next: NextFunction): void {
+export function authRateLimitMiddleware(
+  request: Request,
+  response: Response,
+  next: NextFunction
+): void {
   const key = request.ip || "unknown";
   const currentTime = Date.now();
   const currentEntry = attemptStore.get(key);
