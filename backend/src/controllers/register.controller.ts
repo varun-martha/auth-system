@@ -6,7 +6,10 @@ import { registerUser } from "@/services/register-user.service.js";
 import { registerValidator } from "@/validators/register.validator.js";
 import { getRequestMetadata } from "@/utils/audit-log.util.js";
 
-export async function registerController(request: Request, response: Response): Promise<void> {
+export async function registerController(
+  request: Request,
+  response: Response
+): Promise<void> {
   const parsedBody = registerValidator.safeParse(request.body);
 
   if (!parsedBody.success) {

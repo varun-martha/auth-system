@@ -6,7 +6,10 @@ import { loginUser } from "@/services/login-user.service.js";
 import { loginValidator } from "@/validators/login.validator.js";
 import { getRequestMetadata } from "@/utils/audit-log.util.js";
 
-export async function loginController(request: Request, response: Response): Promise<void> {
+export async function loginController(
+  request: Request,
+  response: Response
+): Promise<void> {
   const parsedBody = loginValidator.safeParse(request.body);
 
   if (!parsedBody.success) {

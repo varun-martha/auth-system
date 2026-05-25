@@ -3,6 +3,7 @@ import express from "express";
 
 import { registerAuthRoutes } from "@/routes/auth/index.js";
 import { registerUserRoutes } from "@/routes/users/index.js";
+import { registerInviteRoutes } from "@/routes/invites/index.js";
 
 export function registerRoutes(app: Express): void {
   const router = express.Router();
@@ -13,6 +14,7 @@ export function registerRoutes(app: Express): void {
 
   registerAuthRoutes(router);
   registerUserRoutes(router);
+  registerInviteRoutes(router);
 
   app.use("/api/v1", router);
 }

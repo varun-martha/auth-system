@@ -6,7 +6,10 @@ import { logoutUser } from "@/services/logout-user.service.js";
 import type { AuthenticatedRequest } from "@/types/express/authenticated-request.js";
 import { getRequestMetadata } from "@/utils/audit-log.util.js";
 
-export async function logoutController(request: AuthenticatedRequest, response: Response): Promise<void> {
+export async function logoutController(
+  request: AuthenticatedRequest,
+  response: Response
+): Promise<void> {
   if (request.sessionId) {
     await logoutUser(request.sessionId);
   }
