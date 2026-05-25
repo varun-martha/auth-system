@@ -76,10 +76,10 @@ export async function loginWithGoogleIdentity(input: {
     userAgent: input.userAgent
   });
 
-  // Automatically mark any pending invitations for this email as Accepted if a new account was just created
+  // Automatically mark any pending invitations for this email as Joined if a new account was just created
   if (!existingUser) {
     await InvitationModel.updateMany(
-      { inviteeEmail: input.email, status: "Sent" },
+      { inviteeEmail: input.email.toLowerCase(), status: "Sent" },
       { $set: { status: "Joined" } }
     );
   }

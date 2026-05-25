@@ -44,9 +44,9 @@ export async function registerUser(input: {
     userAgent: input.userAgent
   });
 
-  // Automatically mark any pending invitations for this email as Accepted
+  // Automatically mark any pending invitations for this email as Joined
   await InvitationModel.updateMany(
-    { inviteeEmail: input.email, status: "Sent" },
+    { inviteeEmail: input.email.toLowerCase(), status: "Sent" },
     { $set: { status: "Joined" } }
   );
 
