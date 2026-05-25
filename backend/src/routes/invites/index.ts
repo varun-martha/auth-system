@@ -9,8 +9,8 @@ import { env } from "@/config/env.js";
 export function registerInviteRoutes(router: Router): void {
   router.post(
     "/invites",
-    inviteRateLimiter,
     sessionAuthMiddleware,
+    inviteRateLimiter,
     async (request, response) => {
       try {
         const user = request.authenticatedUser;
