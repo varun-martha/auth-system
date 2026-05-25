@@ -13,7 +13,7 @@
 ### Session 2026-05-22
 
 - Q: Should the dashboard sidebar be mobile responsive? → A: Yes, the dashboard sidebar must be mobile responsive.
-- Q: Which email service provider should be used to send the invitation emails? → A: Resend
+- Q: Which email service provider should be used to send the invitation emails? → A: Nodemailer (SMTP)
 - Q: How should the randomly generated default avatar be created? → A: Use DiceBear API to generate a deterministic image URL based on their email
 
 ## User Scenarios & Testing *(mandatory)*
@@ -61,6 +61,7 @@ As a user, I want to see a list of people I have successfully invited to the pla
 
 1. **Given** I have invited several friends, **When** I navigate to the invited people list, **Then** I see the email addresses of the people I invited.
 2. **Given** I have not invited anyone yet, **When** I view the list, **Then** I see an empty state with a call-to-action to invite friends.
+3. **Given** an invited friend registers for an account, **When** their registration is successful, **Then** the invitation status automatically updates from 'Sent' to 'Joined'.
 
 ### Edge Cases
 
@@ -88,7 +89,7 @@ As a user, I want to see a list of people I have successfully invited to the pla
 ### Key Entities
 
 - **User**: Represents the platform member. Attributes: ID, Name, Email, Avatar URL.
-- **Invitation**: Represents an invite sent to a potential user. Attributes: Inviter ID, Invitee Email, Status (Sent, Accepted), Timestamp.
+- **Invitation**: Represents an invite sent to a potential user. Attributes: Inviter ID, Invitee Email, Status (Sent, Joined), Timestamp.
 
 ## Success Criteria *(mandatory)*
 
@@ -101,5 +102,5 @@ As a user, I want to see a list of people I have successfully invited to the pla
 ## Assumptions
 
 - Users have already been authenticated before accessing the dashboard.
-- Resend will be configured as the email service provider for sending invitations.
-- Tracking whether an invite is "accepted" is beyond the scope of this immediate feature unless specified (currently just listing who they invited).
+- Nodemailer will be configured via SMTP as the email service provider for sending invitations.
+- Tracking whether an invite is "joined" is automatically handled upon successful registration.

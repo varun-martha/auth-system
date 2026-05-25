@@ -6,13 +6,13 @@
 
 ## Summary
 
-Add the ability for users to invite friends to PaySplit via email using Resend, generate a default avatar via the DiceBear API, and access a mobile-responsive dashboard sidebar that includes a "My Profile" view and a list of invited people.
+Add the ability for users to invite friends to PaySplit via email using Nodemailer (SMTP), generate a default avatar via the DiceBear API, and access a mobile-responsive dashboard sidebar that includes a "My Profile" view and a list of invited people.
 
 ## Technical Context
 
 **Language/Version**: TypeScript
 
-**Primary Dependencies**: Next.js (frontend), React (frontend), Express (backend), Mongoose (backend), Resend (Node SDK)
+**Primary Dependencies**: Next.js (frontend), React (frontend), Express (backend), Mongoose (backend), Nodemailer
 
 **Storage**: MongoDB (via Mongoose)
 
@@ -24,7 +24,7 @@ Add the ability for users to invite friends to PaySplit via email using Resend, 
 
 **Performance Goals**: Fast invite API response (< 500ms), fast rendering of the generated avatar.
 
-**Constraints**: Sidebar must be mobile responsive. Resend email sending rate limits apply.
+**Constraints**: Sidebar must be mobile responsive. SMTP provider email sending rate limits apply.
 
 **Scale/Scope**: Current scope is individual user invites (1-to-1).
 
@@ -59,7 +59,7 @@ specs/004-paysplit-invite/
 backend/
 ├── src/
 │   ├── models/        # Invitation model
-│   ├── services/      # Resend integration
+│   ├── services/      # Nodemailer integration
 │   └── api/           # Invite routes, Profile routes
 └── tests/
 

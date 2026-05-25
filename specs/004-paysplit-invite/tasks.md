@@ -12,8 +12,8 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Add `resend` package to `backend/package.json`
-- [ ] T002 Add `RESEND_API_KEY` to `backend/.env.example`
+- [x] T001 Add `nodemailer` package to `backend/package.json`
+- [x] T002 Add `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` to `backend/.env.example`
 
 ---
 
@@ -23,9 +23,9 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T003 Create `Invitation` Mongoose schema in `backend/src/models/invitation.model.ts`
-- [ ] T004 Update `User` Mongoose schema to include `avatarUrl` in `backend/src/models/user.model.ts`
-- [ ] T005 [P] Setup rate limiting middleware for API routes in `backend/src/middleware/rateLimiter.ts`
+- [x] T003 Create `Invitation` Mongoose schema in `backend/src/models/invitation.model.ts`
+- [x] T004 Update `User` Mongoose schema to include `avatarUrl` in `backend/src/models/user.model.ts`
+- [x] T005 [P] Setup rate limiting middleware for API routes in `backend/src/middleware/rateLimiter.ts`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -39,16 +39,16 @@
 
 ### Tests for User Story 1 ⚠️
 
-- [ ] T006 [P] [US1] Integration test for successful invite flow in `backend/tests/integration/invite.test.ts`
-- [ ] T007 [P] [US1] Failure-path test for rate limiting abuse defense in `backend/tests/integration/invite.test.ts`
-- [ ] T008 [P] [US1] Unit tests for Resend service in `backend/tests/unit/email.service.test.ts`
+- [x] T006 [P] [US1] Integration test for successful invite flow in `backend/tests/integration/invite.test.ts`
+- [x] T007 [P] [US1] Failure-path test for rate limiting abuse defense in `backend/tests/integration/invite.test.ts`
+- [x] T008 [P] [US1] Unit tests for Nodemailer service in `backend/tests/unit/email.service.test.ts`
 
 ### Implementation for User Story 1
 
-- [ ] T009 [P] [US1] Implement `EmailService` using Resend in `backend/src/services/email.service.ts`
-- [ ] T010 [US1] Implement `POST /api/invites` endpoint in `backend/src/api/invite.routes.ts` (with rate limiter)
-- [ ] T011 [US1] Create Invite UI component in `frontend/src/components/InviteForm.tsx`
-- [ ] T012 [US1] Integrate `InviteForm` with backend API in `frontend/src/services/api.ts`
+- [x] T009 [P] [US1] Implement `EmailService` using Nodemailer in `backend/src/services/email.service.ts`
+- [x] T010 [US1] Implement `POST /api/invites` endpoint in `backend/src/api/invite.routes.ts` (with rate limiter)
+- [x] T011 [US1] Create Invite UI component in `frontend/src/components/InviteForm.tsx`
+- [x] T012 [US1] Integrate `InviteForm` with backend API in `frontend/src/services/api.ts`
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -62,16 +62,16 @@
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T013 [P] [US2] Integration test for fetching profile in `backend/tests/integration/profile.test.ts`
-- [ ] T014 [P] [US2] UI test for Sidebar responsiveness in `frontend/tests/e2e/sidebar.spec.ts`
+- [x] T013 [P] [US2] Integration test for fetching profile in `backend/tests/integration/profile.test.ts`
+- [x] T014 [P] [US2] UI test for Sidebar responsiveness in `frontend/tests/e2e/sidebar.spec.ts`
 
 ### Implementation for User Story 2
 
-- [ ] T015 [P] [US2] Implement DiceBear URL generation logic in `backend/src/services/user.service.ts`
-- [ ] T016 [US2] Implement `GET /api/users/profile` endpoint in `backend/src/api/user.routes.ts`
-- [ ] T017 [US2] Create responsive Dashboard Sidebar component in `frontend/src/components/Sidebar.tsx`
-- [ ] T018 [US2] Create Avatar component in `frontend/src/components/Avatar.tsx`
-- [ ] T019 [US2] Create "My Profile" page in `frontend/src/app/profile/page.tsx` integrating Sidebar and Avatar
+- [x] T015 [P] [US2] Implement DiceBear URL generation logic in `backend/src/services/user.service.ts`
+- [x] T016 [US2] Implement `GET /api/users/profile` endpoint in `backend/src/api/user.routes.ts`
+- [x] T017 [US2] Create responsive Dashboard Sidebar component in `frontend/src/components/Sidebar.tsx`
+- [x] T018 [US2] Create Avatar component in `frontend/src/components/Avatar.tsx`
+- [x] T019 [US2] Create "My Profile" page in `frontend/src/app/profile/page.tsx` integrating Sidebar and Avatar
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -85,13 +85,13 @@
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T020 [P] [US3] Integration test for fetching invited people in `backend/tests/integration/invite.test.ts`
+- [x] T020 [P] [US3] Integration test for fetching invited people in `backend/tests/integration/invite.test.ts`
 
 ### Implementation for User Story 3
 
-- [ ] T021 [US3] Implement `GET /api/invites` endpoint in `backend/src/api/invite.routes.ts`
-- [ ] T022 [US3] Create Invited People List component in `frontend/src/components/InvitedList.tsx`
-- [ ] T023 [US3] Integrate `InvitedList` into the dashboard or profile page
+- [x] T021 [US3] Implement `GET /api/invites` endpoint in `backend/src/api/invite.routes.ts`
+- [x] T022 [US3] Create Invited People List component in `frontend/src/components/InvitedList.tsx`
+- [x] T023 [US3] Integrate `InvitedList` into the dashboard or profile page
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -101,9 +101,9 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T024 Run code formatting and linting
-- [ ] T025 Run quickstart.md validation to ensure the feature is documented properly
-- [ ] T026 Clean up UI inconsistencies across the newly added components
+- [x] T024 Run code formatting and linting
+- [x] T025 Run quickstart.md validation to ensure the feature is documented properly
+- [x] T026 Clean up UI inconsistencies across the newly added components
 
 ---
 

@@ -15,6 +15,6 @@
   - `_id`: ObjectId
   - `inviterId`: ObjectId (Ref: User)
   - `inviteeEmail`: String
-  - `status`: String (Enum: ['Sent', 'Accepted'])
+  - `status`: String (Enum: ['Sent', 'Joined'])
   - `createdAt`: Date
 - **Relationships**: Belongs to User (Inviter)
