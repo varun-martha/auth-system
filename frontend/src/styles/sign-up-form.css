@@ -8,8 +8,9 @@
   overflow: hidden;
 }
 
-.auth-page::before, .auth-page::after {
-  content: '';
+.auth-page::before,
+.auth-page::after {
+  content: "";
   position: absolute;
   width: 60vw;
   height: 60vw;

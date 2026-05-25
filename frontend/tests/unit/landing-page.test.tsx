@@ -6,6 +6,8 @@ describe("LandingPage", () => {
   it("shows marketing CTA links", () => {
     render(<LandingPage />);
 
-    expect(screen.getByText(/launch a clean, secure sign-in experience/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/launch a clean, secure sign-in experience/i)
+    ).toBeInTheDocument();
   });
 });

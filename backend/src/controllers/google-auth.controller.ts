@@ -7,7 +7,10 @@ import { verifyGoogleToken } from "@/services/verify-google-token.service.js";
 import { googleAuthValidator } from "@/validators/google-auth.validator.js";
 import { getRequestMetadata } from "@/utils/audit-log.util.js";
 
-export async function googleAuthController(request: Request, response: Response): Promise<void> {
+export async function googleAuthController(
+  request: Request,
+  response: Response
+): Promise<void> {
   const parsedBody = googleAuthValidator.safeParse(request.body);
 
   if (!parsedBody.success) {
@@ -56,7 +59,10 @@ export async function googleAuthController(request: Request, response: Response)
 
     response.status(401).json({
       code: "GOOGLE_AUTH_FAILED",
-      message: error instanceof Error ? error.message : "Unable to complete Google sign-in."
+      message:
+        error instanceof Error
+          ? error.message
+          : "Unable to complete Google sign-in."
     });
   }
 }

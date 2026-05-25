@@ -27,7 +27,9 @@ export function SignUpForm() {
       router.push(response.redirectTo);
       router.refresh();
     } catch (error) {
-      setFeedbackMessage(error instanceof Error ? error.message : "Unable to register.");
+      setFeedbackMessage(
+        error instanceof Error ? error.message : "Unable to register."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -41,11 +43,21 @@ export function SignUpForm() {
       </label>
       <label className="auth-field">
         <span>Email</span>
-        <input name="email" placeholder="jane@example.com" required type="email" />
+        <input
+          name="email"
+          placeholder="jane@example.com"
+          required
+          type="email"
+        />
       </label>
       <label className="auth-field">
         <span>Password</span>
-        <input name="password" placeholder="••••••••" required type="password" />
+        <input
+          name="password"
+          placeholder="••••••••"
+          required
+          type="password"
+        />
       </label>
       <button className="primary-button" disabled={isSubmitting} type="submit">
         {isSubmitting ? "Creating account..." : "Create account"}

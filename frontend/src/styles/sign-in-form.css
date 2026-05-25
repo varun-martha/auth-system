@@ -10,7 +10,7 @@
 
 .auth-divider::before,
 .auth-divider::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   width: 35%;

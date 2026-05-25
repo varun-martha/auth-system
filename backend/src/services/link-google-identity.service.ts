@@ -1,7 +1,17 @@
-import { createIdentityLink, findIdentityLinkByProviderSubject, touchIdentityLink } from "@/repositories/identity-link.repository.js";
-import { createUserAccount, findUserByEmail, findUserById, updateLastAuthenticatedAt } from "@/repositories/user-account.repository.js";
+import {
+  createIdentityLink,
+  findIdentityLinkByProviderSubject,
+  touchIdentityLink
+} from "@/repositories/identity-link.repository.js";
+import {
+  createUserAccount,
+  findUserByEmail,
+  findUserById,
+  updateLastAuthenticatedAt
+} from "@/repositories/user-account.repository.js";
 import { createSessionForUser } from "@/services/create-session.service.js";
 import { buildUserSummary } from "@/services/get-user-summary.service.js";
+import { InvitationModel } from "@/models/invitation.model.js";
 
 export async function loginWithGoogleIdentity(input: {
   email: string;
@@ -9,8 +19,16 @@ export async function loginWithGoogleIdentity(input: {
   username: string;
   ipAddress: string;
   userAgent: string;
-}): Promise<{ created: boolean; redirectTo: string; sessionToken: string; user: ReturnType<typeof buildUserSummary> }> {
-  const existingLink = await findIdentityLinkByProviderSubject("google", input.subject);
+}): Promise<{
+  created: boolean;
+  redirectTo: string;
+  sessionToken: string;
+  user: ReturnType<typeof buildUserSummary>;
+}> {
+  const existingLink = await findIdentityLinkByProviderSubject(
+    "google",
+    input.subject
+  );
 
   if (existingLink) {
     const linkedUser = await findUserById(String(existingLink.userId));
@@ -57,6 +75,14 @@ export async function loginWithGoogleIdentity(input: {
     ipAddress: input.ipAddress,
     userAgent: input.userAgent
   });
+
+  // Automatically mark any pending invitations for this email as Joined if a new account was just created
+  if (!existingUser) {
+    await InvitationModel.updateMany(
+      { inviteeEmail: input.email.toLowerCase(), status: "Sent" },
+      { $set: { status: "Joined" } }
+    );
+  }
 
   return {
     created: !existingUser,

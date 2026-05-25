@@ -40,5 +40,7 @@ const userSessionSchema = new Schema(
   }
 );
 
-export type UserSessionDocument = InferSchemaType<typeof userSessionSchema> & { _id: Types.ObjectId };
+export type UserSessionDocument = InferSchemaType<typeof userSessionSchema> & {
+  _id: Types.ObjectId;
+};
 export const UserSessionModel = model("UserSession", userSessionSchema);

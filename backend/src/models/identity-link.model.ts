@@ -37,7 +37,12 @@ const identityLinkSchema = new Schema(
   }
 );
 
-identityLinkSchema.index({ provider: 1, providerSubject: 1 }, { unique: true, sparse: true });
+identityLinkSchema.index(
+  { provider: 1, providerSubject: 1 },
+  { unique: true, sparse: true }
+);
 
-export type IdentityLinkDocument = InferSchemaType<typeof identityLinkSchema> & { _id: Types.ObjectId };
+export type IdentityLinkDocument = InferSchemaType<
+  typeof identityLinkSchema
+> & { _id: Types.ObjectId };
 export const IdentityLinkModel = model("IdentityLink", identityLinkSchema);

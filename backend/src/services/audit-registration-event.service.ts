@@ -13,6 +13,8 @@ export async function auditRegistrationEvent(input: {
     provider: "credentials",
     ipAddress: input.ipAddress,
     userAgent: input.userAgent,
-    metadata: input.failureReason ? { failureReason: input.failureReason } : undefined
+    metadata: input.failureReason
+      ? { failureReason: input.failureReason }
+      : undefined
   });
 }

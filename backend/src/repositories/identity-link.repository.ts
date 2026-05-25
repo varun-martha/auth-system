@@ -1,4 +1,7 @@
-import { IdentityLinkModel, type IdentityLinkDocument } from "@/models/identity-link.model.js";
+import {
+  IdentityLinkModel,
+  type IdentityLinkDocument
+} from "@/models/identity-link.model.js";
 
 export async function createIdentityLink(input: {
   userId: string;

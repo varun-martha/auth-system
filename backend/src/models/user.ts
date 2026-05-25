@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
   email: string;
@@ -18,31 +18,34 @@ const UserSchema = new Schema<IUser>(
       unique: true,
       trim: true,
       lowercase: true,
-      match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please provide a valid email'],
+      match: [
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+        "Please provide a valid email"
+      ]
     },
     name: {
       type: String,
       required: true,
-      trim: true,
+      trim: true
     },
     passwordHash: {
       type: String,
-      required: false,
+      required: false
     },
     googleId: {
       type: String,
       required: false,
       unique: true,
-      sparse: true,
+      sparse: true
     },
     lastLogoutAt: {
       type: Date,
-      required: false,
-    },
+      required: false
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
-export const User = mongoose.model<IUser>('User', UserSchema);
+export const User = mongoose.model<IUser>("User", UserSchema);

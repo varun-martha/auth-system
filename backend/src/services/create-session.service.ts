@@ -1,6 +1,10 @@
 import { env } from "@/config/env.js";
 import { createUserSession } from "@/repositories/user-session.repository.js";
-import { buildSessionExpiryDate, generateSessionToken, hashSessionToken } from "@/utils/session.util.js";
+import {
+  buildSessionExpiryDate,
+  generateSessionToken,
+  hashSessionToken
+} from "@/utils/session.util.js";
 
 export async function createSessionForUser(input: {
   userId: string;

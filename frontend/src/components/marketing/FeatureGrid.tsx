@@ -1,15 +1,18 @@
 const featureCards = [
   {
     title: "Credential auth",
-    description: "Register and sign in with clear validation and safe failure handling."
+    description:
+      "Register and sign in with clear validation and safe failure handling."
   },
   {
     title: "Google SSO",
-    description: "Offer users a faster path into the product with a familiar identity flow."
+    description:
+      "Offer users a faster path into the product with a familiar identity flow."
   },
   {
     title: "Protected dashboard",
-    description: "Confirm authentication success immediately with profile-aware post-login views."
+    description:
+      "Confirm authentication success immediately with profile-aware post-login views."
   }
 ];
 

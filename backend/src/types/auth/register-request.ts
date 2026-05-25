@@ -17,6 +17,7 @@ export interface UserSummaryDto {
   id: string;
   username: string;
   email: string;
+  avatarUrl?: string;
 }
 
 export interface AuthSuccessDto {

@@ -7,13 +7,22 @@ const HASH_DIGEST = "sha512";
 export async function hashPassword(plainPassword: string): Promise<string> {
   const salt = crypto.randomBytes(16).toString("hex");
   const hash = crypto
-    .pbkdf2Sync(plainPassword, salt, HASH_ITERATIONS, HASH_KEY_LENGTH, HASH_DIGEST)
+    .pbkdf2Sync(
+      plainPassword,
+      salt,
+      HASH_ITERATIONS,
+      HASH_KEY_LENGTH,
+      HASH_DIGEST
+    )
     .toString("hex");
 
   return `${salt}:${hash}`;
 }
 
-export async function verifyPassword(plainPassword: string, passwordHash: string): Promise<boolean> {
+export async function verifyPassword(
+  plainPassword: string,
+  passwordHash: string
+): Promise<boolean> {
   const [salt, expectedHash] = passwordHash.split(":");
 
   if (!salt || !expectedHash) {
@@ -21,8 +30,17 @@ export async function verifyPassword(plainPassword: string, passwordHash: string
   }
 
   const actualHash = crypto
-    .pbkdf2Sync(plainPassword, salt, HASH_ITERATIONS, HASH_KEY_LENGTH, HASH_DIGEST)
+    .pbkdf2Sync(
+      plainPassword,
+      salt,
+      HASH_ITERATIONS,
+      HASH_KEY_LENGTH,
+      HASH_DIGEST
+    )
     .toString("hex");
 
-  return crypto.timingSafeEqual(Buffer.from(actualHash), Buffer.from(expectedHash));
+  return crypto.timingSafeEqual(
+    Buffer.from(actualHash),
+    Buffer.from(expectedHash)
+  );
 }
