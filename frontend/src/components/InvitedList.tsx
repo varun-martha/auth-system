@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getInvites } from "@/services/invite.service";
+import { getInvites, type Invite } from "@/services/invite.service";
 
 export function InvitedList({
   refreshTrigger = 0
 }: {
   refreshTrigger?: number;
 }) {
-  const [invites, setInvites] = useState<any[]>([]);
+  const [invites, setInvites] = useState<Invite[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

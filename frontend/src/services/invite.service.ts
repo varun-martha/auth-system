@@ -13,8 +13,15 @@ export async function sendInvite(
   );
 }
 
-export async function getInvites(): Promise<{ invites: any[] }> {
-  return fetchJson<{ invites: any[] }>(buildApiUrl("/invites"), {
+export interface Invite {
+  _id: string;
+  inviteeEmail: string;
+  status: "Sent" | "Joined";
+  createdAt: string;
+}
+
+export async function getInvites(): Promise<{ invites: Invite[] }> {
+  return fetchJson<{ invites: Invite[] }>(buildApiUrl("/invites"), {
     method: "GET"
   });
 }
