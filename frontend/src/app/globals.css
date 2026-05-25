@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;700;800&display=swap");
 @import "../styles/landing-page.css";
 @import "../styles/sign-up-form.css";
 @import "../styles/sign-in-form.css";
@@ -6,11 +6,11 @@
 
 :root {
   color-scheme: dark;
-  --page-background: #09090b; 
+  --page-background: #09090b;
   --panel-background: rgba(24, 24, 27, 0.4);
   --text-primary: #fafafa;
   --text-muted: #a1a1aa;
-  --brand-accent: #10b981; 
+  --brand-accent: #10b981;
   --brand-accent-dark: #059669;
   --brand-accent-glow: rgba(16, 185, 129, 0.2);
   --border-subtle: rgba(255, 255, 255, 0.08);
@@ -33,7 +33,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Outfit", sans-serif;
 }
 
@@ -52,9 +57,38 @@ input {
   color: var(--brand-accent);
 }
 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes liquidFloat {
-  0% { transform: rotate(0deg) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-  33% { transform: rotate(120deg) scale(1.1); border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
-  66% { transform: rotate(240deg) scale(0.9); border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
-  100% { transform: rotate(360deg) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  0% {
+    transform: rotate(0deg) scale(1);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+  33% {
+    transform: rotate(120deg) scale(1.1);
+    border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+  }
+  66% {
+    transform: rotate(240deg) scale(0.9);
+    border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
 }

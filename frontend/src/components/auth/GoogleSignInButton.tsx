@@ -17,7 +17,10 @@ declare global {
             client_id: string;
             callback: (response: { credential?: string }) => void;
           }) => void;
-          renderButton: (container: HTMLElement, options: { theme: string; size: string; width?: string }) => void;
+          renderButton: (
+            container: HTMLElement,
+            options: { theme: string; size: string; width?: string }
+          ) => void;
         };
       };
     };
@@ -32,22 +35,25 @@ export function GoogleSignInButton() {
   const { googleClientId } = getFrontendEnv();
   const buttonContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleCredentialResponse = useCallback(async (response: { credential?: string }) => {
-    if (!response?.credential) {
-      setError("Google sign-in failed to return a credential.");
-      return;
-    }
+  const handleCredentialResponse = useCallback(
+    async (response: { credential?: string }) => {
+      if (!response?.credential) {
+        setError("Google sign-in failed to return a credential.");
+        return;
+      }
 
-    try {
-      const result = await loginWithGoogle(response.credential);
-      setCachedUser(result.user);
-      router.push(result.redirectTo);
-      router.refresh();
-    } catch (err) {
-      console.error("Google sign-in error:", err);
-      setError("Unable to complete Google sign-in. Please try again.");
-    }
-  }, [router]);
+      try {
+        const result = await loginWithGoogle(response.credential);
+        setCachedUser(result.user);
+        router.push(result.redirectTo);
+        router.refresh();
+      } catch (err) {
+        console.error("Google sign-in error:", err);
+        setError("Unable to complete Google sign-in. Please try again.");
+      }
+    },
+    [router]
+  );
 
   const initGoogle = useCallback(() => {
     if (!window.google?.accounts?.id || !buttonContainerRef.current) {
@@ -87,7 +93,7 @@ export function GoogleSignInButton() {
           initGoogle();
         }
       }, 100);
-      
+
       // Stop polling after 5 seconds
       setTimeout(() => clearInterval(interval), 5000);
       return () => clearInterval(interval);
@@ -96,18 +102,41 @@ export function GoogleSignInButton() {
 
   return (
     <>
-      <Script 
-        src="https://accounts.google.com/gsi/client" 
-        strategy="lazyOnload" 
+      <Script
+        src="https://accounts.google.com/gsi/client"
+        strategy="lazyOnload"
         onLoad={initGoogle}
         onError={() => setError("Unable to load Google sign-in script.")}
       />
-      <div 
-        ref={buttonContainerRef} 
-        style={{ width: "100%", display: "flex", justifyContent: "center", minHeight: "40px" }} 
+      <div
+        ref={buttonContainerRef}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          minHeight: "40px"
+        }}
       />
-      {!isReady && !error ? <p style={{ textAlign: "center", color: "var(--text-muted)", fontSize: "0.9rem" }}>Loading Google sign-in…</p> : null}
-      {error ? <p className="auth-feedback" style={{ textAlign: "center", marginTop: "1rem" }} role="alert">{error}</p> : null}
+      {!isReady && !error ? (
+        <p
+          style={{
+            textAlign: "center",
+            color: "var(--text-muted)",
+            fontSize: "0.9rem"
+          }}
+        >
+          Loading Google sign-in…
+        </p>
+      ) : null}
+      {error ? (
+        <p
+          className="auth-feedback"
+          style={{ textAlign: "center", marginTop: "1rem" }}
+          role="alert"
+        >
+          {error}
+        </p>
+      ) : null}
     </>
   );
 }

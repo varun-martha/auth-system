@@ -23,9 +23,11 @@ export function SignInForm() {
       });
       setCachedUser(response.user);
       router.push(response.redirectTo);
-      router.refresh(); 
+      router.refresh();
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : "Unable to sign in.");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Unable to sign in."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -36,11 +38,21 @@ export function SignInForm() {
       <AuthErrorBanner message={errorMessage} />
       <label className="auth-field">
         <span>Email</span>
-        <input name="email" placeholder="jane@example.com" required type="email" />
+        <input
+          name="email"
+          placeholder="jane@example.com"
+          required
+          type="email"
+        />
       </label>
       <label className="auth-field">
         <span>Password</span>
-        <input name="password" placeholder="••••••••" required type="password" />
+        <input
+          name="password"
+          placeholder="••••••••"
+          required
+          type="password"
+        />
       </label>
       <button className="primary-button" disabled={isSubmitting} type="submit">
         {isSubmitting ? "Signing in..." : "Sign in"}
