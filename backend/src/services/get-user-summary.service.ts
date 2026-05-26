@@ -6,6 +6,6 @@ export function buildUserSummary(user: UserAccountDocument): UserSummaryDto {
     id: String(user._id),
     username: user.username,
     email: user.email,
-    avatarUrl: user.avatarUrl
+    avatarUrl: user.avatarUrl ?? undefined
   };
 }
