@@ -3,6 +3,7 @@ import { Server, Socket } from "socket.io";
 import { env } from "@/config/env.js";
 import { findActiveSessionByTokenHash } from "@/repositories/user-session.repository.js";
 import { hashSessionToken } from "@/utils/session.util.js";
+import * as cookie from "cookie";
 
 class SocketService {
   private io: Server | null = null;
@@ -24,15 +25,12 @@ class SocketService {
           return next(new Error("Authentication error"));
         }
 
-        const cookieName = env.SESSION_COOKIE_NAME + "=";
-        const cookieArray = rawCookies.split("; ");
-        const sessionCookie = cookieArray.find(c => c.startsWith(cookieName));
+        const parsedCookies = cookie.parse(rawCookies);
+        const rawSessionToken = parsedCookies[env.SESSION_COOKIE_NAME];
 
-        if (!sessionCookie) {
+        if (!rawSessionToken) {
           return next(new Error("Authentication error"));
         }
-
-        const rawSessionToken = sessionCookie.substring(cookieName.length);
         const session = await findActiveSessionByTokenHash(
           hashSessionToken(rawSessionToken)
         );
@@ -51,6 +49,7 @@ class SocketService {
     this.io.on("connection", (socket: Socket) => {
       const userId = (socket as any).userId;
       if (!userId) {
+        console.warn("Socket connected with no userId, disconnecting", socket.id);
         socket.disconnect();
         return;
       }

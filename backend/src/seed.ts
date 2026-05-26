@@ -7,10 +7,18 @@ async function seed() {
   await connectToDatabase(env.MONGODB_URI);
   console.log("Connected to DB.");
 
-  // Get the first user (likely the one you are logged in as, e.g., varun)
-  const mainUser = await UserAccountModel.findOne().sort({ createdAt: 1 });
+  // Get the specified user or default to the first created
+  const mainUserEmail = process.env.SEED_USER_EMAIL;
+  let mainUser;
+  
+  if (mainUserEmail) {
+    mainUser = await UserAccountModel.findOne({ email: mainUserEmail });
+  } else {
+    mainUser = await UserAccountModel.findOne().sort({ createdAt: 1 });
+  }
+
   if (!mainUser) {
-    console.log("No users found in the database to link friends to.");
+    console.log("No valid main user found in the database to link friends to.");
     process.exit(0);
     return;
   }

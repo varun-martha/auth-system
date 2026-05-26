@@ -21,6 +21,14 @@ interface PendingRequest extends FriendData {
   direction: "incoming" | "outgoing";
 }
 
+interface CurrentUser {
+  id?: string;
+  _id?: string;
+  username?: string;
+  email?: string;
+  avatarUrl?: string;
+}
+
 export default function FriendsPage() {
   const [activeTab, setActiveTab] = useState<TabState>("friends");
   const [friends, setFriends] = useState<FriendData[]>([]);
@@ -32,7 +40,7 @@ export default function FriendsPage() {
   const [isSearching, setIsSearching] = useState(false);
   const [sentRequests, setSentRequests] = useState<Set<string>>(new Set());
   const [confirmModal, setConfirmModal] = useState<{ isOpen: boolean; friendshipId: string | null; message: string }>({ isOpen: false, friendshipId: null, message: "" });
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -66,7 +74,8 @@ export default function FriendsPage() {
   useEffect(() => {
     loadFriends();
 
-    const socket: Socket = io(getFrontendEnv().apiBaseUrl.replace('/api/v1', ''), {
+    const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || getFrontendEnv().apiBaseUrl.replace('/api/v1', '');
+    const socket: Socket = io(socketUrl, {
       withCredentials: true,
       transports: ['websocket', 'polling']
     });

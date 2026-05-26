@@ -90,12 +90,13 @@ export async function removeFriendController(
     const otherUserId = deletedFriendship.requesterId.toString() === userId.toString() 
       ? deletedFriendship.recipientId.toString() 
       : deletedFriendship.requesterId.toString();
-    socketService.emitToUser(otherUserId, "friend_update");
 
     res.status(200).json({
       success: true,
       message: "Friend removed / Request rejected successfully."
     });
+    
+    socketService.emitToUser(otherUserId, "friend_update");
   } catch (error) {
     console.error("Error removing friend:", error);
     res.status(500).json({
