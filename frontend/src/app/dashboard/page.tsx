@@ -14,7 +14,7 @@ export default async function DashboardPage() {
       <main className="dashboard-main">
         <section className="dashboard-shell">
           <div className="dashboard-header">
-            <h1>Welcome, {user?.name || user?.username || "User"}</h1>
+            <h1>Welcome back, {user?.username || user?.email || "User"}</h1>
           </div>
 
           <div className="dashboard-grid">

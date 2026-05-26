@@ -16,6 +16,7 @@ export function Sidebar() {
 
   const navItems = [
     { name: "Dashboard", href: "/dashboard" },
+    { name: "Your Friends", href: "/friends" },
     { name: "My Profile", href: "/profile" }
   ];
 
@@ -76,7 +77,7 @@ export function Sidebar() {
                 href={item.href}
                 style={{
                   padding: "0.75rem 1rem",
-                  borderRadius: "6px",
+                  borderRadius: "12px",
                   textDecoration: "none",
                   color: isActive ? "var(--brand-accent)" : "var(--text-muted)",
                   backgroundColor: isActive
