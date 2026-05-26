@@ -3,6 +3,7 @@
 @import "../styles/sign-up-form.css";
 @import "../styles/sign-in-form.css";
 @import "../styles/dashboard.css";
+@import "../styles/friends.css";
 
 :root {
   color-scheme: dark;

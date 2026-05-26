@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
 
 vi.mock("@/lib/env", () => ({
