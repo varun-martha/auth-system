@@ -60,15 +60,20 @@ Sends a friend request to another user.
 **Request Body:**
 ```json
 {
-  "userId": "60d5ecb8b392d700153..." // ID of the user to friend
+  "targetUserId": "60d5ecb8b392d700153..." // ID of the user to friend
 }
 ```
 
-**Response (200 OK):**
+**Response (201 Created):**
 ```json
 {
-  "message": "Friend request sent",
-  "friendshipId": "..."
+  "success": true,
+  "request": {
+    "_id": "...",
+    "requesterId": "...",
+    "recipientId": "...",
+    "status": "pending"
+  }
 }
 ```
 

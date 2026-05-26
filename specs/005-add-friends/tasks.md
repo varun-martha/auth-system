@@ -16,7 +16,7 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Verify existing project structure, User model, and authentication middleware
+- [x] T001 Verify existing project structure, User model, and authentication middleware
 
 ---
 
@@ -26,8 +26,8 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T002 Create Friendship model in `backend/src/models/Friendship.ts`
-- [ ] T003 [P] Implement rate limiting configuration for search and friend endpoints in `backend/src/api/middlewares/rateLimiter.ts`
+- [x] T002 Create Friendship model in `backend/src/models/Friendship.ts`
+- [x] T003 [P] Implement rate limiting configuration for search and friend endpoints in `backend/src/api/middlewares/rateLimiter.ts`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -43,15 +43,15 @@
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T004 [P] [US1] Integration test for user search endpoint in `backend/tests/integration/test_search.ts`
-- [ ] T005 [P] [US1] Failure-path test for rate limiting on search endpoint in `backend/tests/integration/test_search_ratelimit.ts`
+- [x] T004 [P] [US1] Integration test for user search endpoint in `backend/tests/integration/test_search.ts`
+- [x] T005 [P] [US1] Failure-path test for rate limiting on search endpoint in `backend/tests/integration/test_search_ratelimit.ts`
 
 ### Implementation for User Story 1
 
-- [ ] T006 [P] [US1] Create search endpoint (`GET /api/users/search`) in `backend/src/api/userController.ts`
-- [ ] T007 [US1] Add search API client method in `frontend/src/services/api.ts`
-- [ ] T008 [P] [US1] Create UserCard component in `frontend/src/components/UserCard.tsx`
-- [ ] T009 [US1] Create Search page in `frontend/src/app/search/page.tsx` integrating the API and UserCard
+- [x] T006 [P] [US1] Create search endpoint (`GET /api/users/search`) in `backend/src/api/userController.ts`
+- [x] T007 [US1] Add search API client method in `frontend/src/services/api.ts`
+- [x] T008 [P] [US1] Create UserCard component in `frontend/src/components/UserCard.tsx`
+- [x] T009 [US1] Create Search page in `frontend/src/app/search/page.tsx` integrating the API and UserCard
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -65,16 +65,16 @@
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T010 [P] [US2] Integration test for get friends endpoint in `backend/tests/integration/test_friends.ts`
-- [ ] T011 [P] [US2] Integration test for remove friend endpoint in `backend/tests/integration/test_friends_remove.ts`
+- [x] T010 [P] [US2] Integration test for get friends endpoint in `backend/tests/integration/test_friends.ts`
+- [x] T011 [P] [US2] Integration test for remove friend endpoint in `backend/tests/integration/test_friends_remove.ts`
 
 ### Implementation for User Story 2
 
-- [ ] T012 [P] [US2] Create get friends endpoint (`GET /api/friends`) in `backend/src/api/friendController.ts`
-- [ ] T013 [P] [US2] Create remove friend endpoint (`DELETE /api/friends/:friendshipId`) in `backend/src/api/friendController.ts`
-- [ ] T014 [US2] Implement friends API client methods in `frontend/src/services/api.ts`
-- [ ] T015 [US2] Create Friends page to display current friends in `frontend/src/app/friends/page.tsx`
-- [ ] T016 [US2] Add "Your Friends" navigation link to the main layout in `frontend/src/components/Sidebar.tsx`
+- [x] T012 [P] [US2] Create get friends endpoint (`GET /api/friends`) in `backend/src/api/friendController.ts`
+- [x] T013 [P] [US2] Create remove friend endpoint (`DELETE /api/friends/:friendshipId`) in `backend/src/api/friendController.ts`
+- [x] T014 [US2] Implement friends API client methods in `frontend/src/services/api.ts`
+- [x] T015 [US2] Create Friends page to display current friends in `frontend/src/app/friends/page.tsx`
+- [x] T016 [US2] Add "Your Friends" navigation link to the main layout in `frontend/src/components/Sidebar.tsx`
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -88,15 +88,15 @@
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T017 [P] [US3] Integration test for send and accept friend requests in `backend/tests/integration/test_friend_requests.ts`
+- [x] T017 [P] [US3] Integration test for send and accept friend requests in `backend/tests/integration/test_friend_requests.ts`
 
 ### Implementation for User Story 3
 
-- [ ] T018 [P] [US3] Create send request endpoint (`POST /api/friends/request`) in `backend/src/api/friendController.ts`
-- [ ] T019 [P] [US3] Create accept request endpoint (`POST /api/friends/accept`) in `backend/src/api/friendController.ts`
-- [ ] T020 [US3] Add request API client methods in `frontend/src/services/api.ts`
-- [ ] T021 [US3] Update UserCard component to show Add Friend / Accept Request actions in `frontend/src/components/UserCard.tsx`
-- [ ] T022 [US3] Display pending incoming and outgoing requests on the Friends page in `frontend/src/app/friends/page.tsx`
+- [x] T018 [P] [US3] Create send request endpoint (`POST /api/friends/request`) in `backend/src/api/friendController.ts`
+- [x] T019 [P] [US3] Create accept request endpoint (`POST /api/friends/accept`) in `backend/src/api/friendController.ts`
+- [x] T020 [US3] Add request API client methods in `frontend/src/services/api.ts`
+- [x] T021 [US3] Update UserCard component to show Add Friend / Accept Request actions in `frontend/src/components/UserCard.tsx`
+- [x] T022 [US3] Display pending incoming and outgoing requests on the Friends page in `frontend/src/app/friends/page.tsx`
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -106,9 +106,23 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T023 [P] E2E Playwright test for complete friend flow (search, request, accept, view list) in `frontend/tests/e2e/friend_flow.spec.ts`
-- [ ] T024 [P] Update documentation with new API endpoints
-- [ ] T025 Run quality checks (linting/type-checking) across all new files
+- [x] T023 [P] E2E Playwright test for complete friend flow (search, request, accept, view list) in `frontend/tests/e2e/friend_flow.spec.ts`
+- [x] T024 [P] Update documentation with new API endpoints
+- [x] T025 Run quality checks (linting/type-checking) across all new files
+
+---
+
+## Phase 7: Real-Time WebSockets & UX Polish (Priority: P1)
+
+**Purpose**: Provide true instantaneous updates for friend requests and state changes, and refine search UI.
+
+- [x] T026 Install `socket.io` (backend) and `socket.io-client` (frontend)
+- [x] T027 Create `SocketService` in `backend/src/services/socket.service.ts` to manage authenticated socket connections
+- [x] T028 Update `backend/src/app/server.ts` to mount the `Socket.IO` server with session cookie auth
+- [x] T029 Emit `friend_update` socket events from `friend.controller.ts` on send, accept, and remove actions
+- [x] T030 Refactor `frontend/src/app/friends/page.tsx` to connect to Socket.IO and remove standard polling interval
+- [x] T031 Update search results in frontend to dynamically reflect existing relationships ("Friend", "Requested", "Accept")
+- [x] T032 Update pending requests notification badge to only count incoming requests
 
 ---
 

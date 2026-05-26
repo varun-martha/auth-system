@@ -20,7 +20,7 @@ The "Add Friends" feature allows users to search for other users by username or 
 
 **Language/Version**: TypeScript
 
-**Primary Dependencies**: Express (Backend), Mongoose (Backend), Next.js/React (Frontend)
+**Primary Dependencies**: Express (Backend), Mongoose (Backend), Socket.IO (Real-time), Next.js/React (Frontend)
 
 **Storage**: MongoDB (Mongoose)
 
@@ -89,7 +89,7 @@ frontend/
 └── tests/
 ```
 
-**Structure Decision**: Web application layout (backend API + Next.js frontend).
+**Structure Decision**: Web application layout (backend API + Next.js frontend). Real-time communication implemented using a Socket.IO server wrapped around the primary Express application to instantly push state changes to the frontend.
 
 ## Complexity Tracking
 

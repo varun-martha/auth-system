@@ -75,6 +75,9 @@ As a user, I want to be able to send friend requests to other users I find throu
 - **FR-006**: System MUST maintain a friends list for each user, accessible via the "Your Friends" section.
 - **FR-007**: System MUST allow users to remove an existing friend from their friends list.
 - **FR-008**: System MUST require explicit approval from the recipient for friend requests before establishing a friendship connection.
+- **FR-009**: System MUST deliver friend requests, acceptances, and removals in real-time using WebSockets so the UI updates instantaneously without manual refresh.
+- **FR-010**: System MUST intelligently update search result action buttons to reflect the user's current relationship status (e.g., displaying "Requested", "Friend", or "Accept") instead of always showing "Add Friend".
+- **FR-011**: System MUST badge the incoming requests tab with the accurate count of incoming requests only.
 
 ### Security & Auth Considerations *(mandatory when authentication changes)*
 
