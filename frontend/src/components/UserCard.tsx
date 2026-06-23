@@ -27,6 +27,7 @@ export function UserCard({ user, actionButton }: UserCardProps) {
               fill
               className="object-cover"
               unoptimized={true}
+              priority={true}
             />
           ) : (
             <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-muted)" }}>

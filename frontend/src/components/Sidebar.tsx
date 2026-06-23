@@ -16,7 +16,9 @@ export function Sidebar() {
 
   const navItems = [
     { name: "Dashboard", href: "/dashboard" },
+    { name: "Activity", href: "/activity" },
     { name: "Your Friends", href: "/friends" },
+    { name: "Groups", href: "/groups" },
     { name: "My Profile", href: "/profile" }
   ];
 
@@ -83,6 +85,8 @@ export function Sidebar() {
                   backgroundColor: isActive
                     ? "var(--brand-accent-glow)"
                     : "transparent",
+                  fontFamily: "'Outfit', sans-serif",
+                  letterSpacing: "0.02em",
                   fontWeight: isActive ? 600 : 400,
                   transition: "all 0.3s ease"
                 }}

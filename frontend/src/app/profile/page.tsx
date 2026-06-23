@@ -13,7 +13,7 @@ export default async function ProfilePage() {
     >
       <Sidebar />
       <main className="dashboard-main">
-        <h1 style={{ marginBottom: "2rem", color: "var(--text-primary)" }}>
+        <h1 style={{ marginBottom: "2rem", color: "var(--brand-accent)", fontFamily: "'Outfit', sans-serif", fontSize: "2.5rem", fontWeight: 800 }}>
           My Profile
         </h1>
 
