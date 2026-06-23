@@ -6,6 +6,7 @@ import { UserCard, User } from "@/components/UserCard";
 import { api } from "@/services/api";
 import { getFrontendEnv } from "@/lib/env";
 import { io, Socket } from "socket.io-client";
+import { AddExpenseModal } from "@/components/groups/AddExpenseModal";
 
 type TabState = "friends" | "pending" | "find";
 
@@ -40,6 +41,7 @@ export default function FriendsPage() {
   const [isSearching, setIsSearching] = useState(false);
   const [sentRequests, setSentRequests] = useState<Set<string>>(new Set());
   const [confirmModal, setConfirmModal] = useState<{ isOpen: boolean; friendshipId: string | null; message: string }>({ isOpen: false, friendshipId: null, message: "" });
+  const [splitFriend, setSplitFriend] = useState<FriendData | null>(null);
   const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
 
   const [loading, setLoading] = useState(true);
@@ -234,9 +236,14 @@ export default function FriendsPage() {
                         avatar: friend.avatar
                       }}
                       actionButton={
-                        <button className="btn-danger" onClick={() => confirmRemoveFriend(friend.friendshipId, friend.username, "remove")}>
-                          Remove
-                        </button>
+                        <div style={{ display: "flex", gap: "0.5rem" }}>
+                          <button className="btn-primary" onClick={() => setSplitFriend(friend)}>
+                            Split
+                          </button>
+                          <button className="btn-danger" onClick={() => confirmRemoveFriend(friend.friendshipId, friend.username, "remove")}>
+                            Remove
+                          </button>
+                        </div>
                       }
                     />
                   ))}
@@ -391,6 +398,21 @@ export default function FriendsPage() {
               </div>
             </div>
           </div>
+        )}
+
+        {splitFriend && currentUser && (
+          <AddExpenseModal
+            members={[
+              { id: currentUser.id || currentUser._id || "", username: currentUser.username || "", email: currentUser.email || "", avatar: currentUser.avatarUrl },
+              { id: splitFriend.id, username: splitFriend.username, email: splitFriend.email, avatar: splitFriend.avatar }
+            ]}
+            currentUserId={currentUser.id || currentUser._id || ""}
+            onClose={() => setSplitFriend(null)}
+            onAdded={() => {
+              setSplitFriend(null);
+              alert("Expense added successfully!");
+            }}
+          />
         )}
       </main>
     </div>
