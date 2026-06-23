@@ -153,7 +153,7 @@
 }
 
 .balance-amount.negative {
-  color: #ef4444;
+  color: #ff6b6b;
 }
 
 .balance-label {
@@ -213,7 +213,7 @@
 }
 
 .activity-amount.negative {
-  color: #ef4444;
+  color: #ff6b6b;
 }
 
 .edit-avatar-badge {

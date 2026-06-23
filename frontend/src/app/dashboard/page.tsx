@@ -55,15 +55,16 @@ export default async function DashboardPage() {
               {summary.recentActivity && summary.recentActivity.length > 0 ? (
                 <ul className="activity-list">
                   {summary.recentActivity.map((activity: any, index: number) => {
-                    const isCredit = activity.paidById === user.id;
+                    const isSettlement = activity.splitMethod === "settlement";
+                    const isCredit = isSettlement ? activity.paidById !== user.id : activity.paidById === user.id;
                     return (
                       <li key={activity.id} className="activity-item animate-fade-in" style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
                         <div className="activity-desc">
                           <div className="activity-title">{activity.title}</div>
                           <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{new Date(activity.date).toLocaleDateString()}</div>
                         </div>
-                        <div className={`activity-amount ${isCredit ? "positive" : ""}`}>
-                          {isCredit ? "+" : ""}₹{(activity.totalAmount / 100).toFixed(2)}
+                        <div className={`activity-amount ${isCredit ? "positive" : "negative"}`}>
+                          {isCredit ? "+" : "-"}₹{(activity.totalAmount / 100).toFixed(2)}
                         </div>
                       </li>
                     );

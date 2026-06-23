@@ -125,8 +125,8 @@
 }
 
 .group-card-badge.owes {
-  background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
+  background: rgba(255, 107, 107, 0.1);
+  color: #ff6b6b;
 }
 
 .group-card-badge.settled {
@@ -208,7 +208,7 @@
 }
 
 .balance-amount-negative {
-  color: #ef4444;
+  color: #ff6b6b;
   font-weight: 700;
 }
 
