@@ -27,13 +27,13 @@ export async function getUserActivityHistory(userId: string, limit = 50, before?
 
   return expenses.map((e: any) => ({
     id: e._id.toString(),
-    groupId: e.groupId._id.toString(),
-    groupName: e.groupId.name,
+    groupId: e.groupId?._id?.toString() ?? e.groupId?.toString() ?? "",
+    groupName: e.groupId?.name ?? "Deleted Group",
     title: e.title,
     totalAmount: e.totalAmount,
     currency: e.currency,
-    paidById: e.paidById._id?.toString() ?? e.paidById.toString(),
-    paidByName: e.paidById.username ?? "Unknown",
+    paidById: e.paidById?._id?.toString() ?? e.paidById?.toString() ?? "",
+    paidByName: e.paidById?.username ?? "Unknown",
     splitMethod: e.splitMethod,
     date: e.date.toISOString(),
     createdAt: e.createdAt,
