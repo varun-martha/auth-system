@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import { GroupModel } from "@/models/group.model.js";
 import { UserAccountModel } from "@/models/user-account.model.js";
+import { FriendshipModel } from "@/models/friendship.model.js";
 import { socketService } from "@/services/socket.service.js";
 
 export async function createGroup({
@@ -122,6 +123,17 @@ export async function addMembersToGroup(groupId: string, newMemberIds: string[],
 }
 
 export async function getOrCreateDirectGroup(userId: string, friendUserId: string) {
+  const friendship = await FriendshipModel.findOne({
+    status: "accepted",
+    $or: [
+      { requesterId: new Types.ObjectId(userId), recipientId: new Types.ObjectId(friendUserId) },
+      { requesterId: new Types.ObjectId(friendUserId), recipientId: new Types.ObjectId(userId) },
+    ],
+  });
+  if (!friendship) {
+    throw new Error("You must be accepted friends to split expenses directly.");
+  }
+
   // Check if direct group already exists between these two users
   const existing = await GroupModel.findOne({
     isDirect: true,
