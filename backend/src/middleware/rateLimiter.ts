@@ -30,3 +30,20 @@ export const friendRequestRateLimiter = rateLimit({
     message: "Too many friend requests, please try again later"
   }
 });
+
+export const groupCreateRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many group create requests, please try again later" },
+});
+
+export const expenseCreateRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many expense create requests, please try again later" },
+});
+
