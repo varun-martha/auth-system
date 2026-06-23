@@ -33,29 +33,22 @@ export async function getDashboardSummary(userId: string) {
     date: e.date.toISOString(),
   }));
 
-  // 3. Calculate Global Net Balance
-  const splits = await ExpenseSplitModel.find({ groupId: { $in: groupIds } }).lean();
-  const expenses = await ExpenseModel.find({ groupId: { $in: groupIds } }).lean();
-  
-  const expenseMap = new Map(expenses.map((e: any) => [e._id.toString(), e]));
+  // 3. Calculate Global Net Balance using Aggregations
+  // Calculate sum of all expenses paid by the user
+  const totalPaidRes = await ExpenseModel.aggregate([
+    { $match: { paidById: userObjId } },
+    { $group: { _id: null, total: { $sum: "$totalAmount" } } }
+  ]);
+  const totalPaid = totalPaidRes[0]?.total || 0;
 
-  let totalBalance = 0; // positive = owed money, negative = owes money
+  // Calculate sum of all splits assigned to the user
+  const totalOwedRes = await ExpenseSplitModel.aggregate([
+    { $match: { userId: userObjId } },
+    { $group: { _id: null, total: { $sum: "$amount" } } }
+  ]);
+  const totalOwed = totalOwedRes[0]?.total || 0;
 
-  for (const split of splits as any[]) {
-    const expense = expenseMap.get(split.expenseId.toString());
-    if (!expense) continue;
-
-    const payerId = expense.paidById.toString();
-    const debtorId = split.userId.toString();
-
-    if (payerId === debtorId) continue;
-
-    if (payerId === userId) {
-      totalBalance += split.amount;
-    } else if (debtorId === userId) {
-      totalBalance -= split.amount;
-    }
-  }
+  const totalBalance = totalPaid - totalOwed;
 
   return {
     totalBalance,
