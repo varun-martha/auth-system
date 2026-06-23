@@ -12,7 +12,6 @@ export async function fetchJson<T>(
   });
 
   const body = await response.json().catch(() => null);
-  console.warn("response:", response);
 
   if (!response.ok) {
     throw new Error(body?.message || "Request failed.");
