@@ -38,7 +38,7 @@ export async function listGroupsController(req: Request, res: Response): Promise
 export async function getGroupController(req: Request, res: Response): Promise<void> {
   try {
     const userId = (req as any).authenticatedUser.id;
-    const { groupId } = req.params;
+    const groupId = req.params.groupId as string;
     const group = await getGroupById(groupId, userId);
     if (!group) {
       res.status(403).json({ success: false, message: "Group not found or access denied." });
@@ -54,7 +54,7 @@ export async function getGroupController(req: Request, res: Response): Promise<v
 export async function addMembersController(req: Request, res: Response): Promise<void> {
   try {
     const userId = (req as any).authenticatedUser.id;
-    const { groupId } = req.params;
+    const groupId = req.params.groupId as string;
     const parsed = addMembersBody.safeParse(req.body);
     if (!parsed.success) {
       res.status(400).json({ success: false, message: parsed.error.errors[0]?.message || "Invalid request." });

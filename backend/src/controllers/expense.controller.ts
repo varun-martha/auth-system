@@ -5,7 +5,7 @@ import { createExpense, listExpenses, getGroupBalances, updateExpense } from "@/
 export async function createExpenseController(req: Request, res: Response): Promise<void> {
   try {
     const userId = (req as any).authenticatedUser.id;
-    const { groupId } = req.params;
+    const groupId = req.params.groupId as string;
     const parsed = createExpenseBody.safeParse(req.body);
     if (!parsed.success) {
       res.status(400).json({ success: false, message: parsed.error.errors[0]?.message || "Invalid request." });
@@ -26,7 +26,8 @@ export async function createExpenseController(req: Request, res: Response): Prom
 export async function updateExpenseController(req: Request, res: Response): Promise<void> {
   try {
     const userId = (req as any).authenticatedUser.id;
-    const { groupId, expenseId } = req.params;
+    const groupId = req.params.groupId as string;
+    const expenseId = req.params.expenseId as string;
     const parsed = createExpenseBody.safeParse(req.body);
     if (!parsed.success) {
       res.status(400).json({ success: false, message: parsed.error.errors[0]?.message || "Invalid request." });
@@ -47,7 +48,7 @@ export async function updateExpenseController(req: Request, res: Response): Prom
 export async function listExpensesController(req: Request, res: Response): Promise<void> {
   try {
     const userId = (req as any).authenticatedUser.id;
-    const { groupId } = req.params;
+    const groupId = req.params.groupId as string;
     const limit = Math.min(parseInt(String(req.query.limit || "20")), 100);
     const before = req.query.before as string | undefined;
     const result = await listExpenses(groupId, userId, limit, before);
@@ -65,7 +66,7 @@ export async function listExpensesController(req: Request, res: Response): Promi
 export async function getGroupBalancesController(req: Request, res: Response): Promise<void> {
   try {
     const userId = (req as any).authenticatedUser.id;
-    const { groupId } = req.params;
+    const groupId = req.params.groupId as string;
     const result = await getGroupBalances(groupId, userId);
     res.status(200).json(result);
   } catch (error: any) {

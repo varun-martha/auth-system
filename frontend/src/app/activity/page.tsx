@@ -89,10 +89,10 @@ export default function ActivityPage() {
                       {month}
                     </h3>
                     <ul className="activity-list">
-                      {items.map((item, i) => {
+                      {(items as any[]).map((item, i) => {
                         const isSettlement = item.splitMethod === "settlement";
                         const isPayer = currentUser && currentUser.id === item.paidById;
-                        const isCredit = isPayer;
+                        const isCredit = isSettlement ? !isPayer : isPayer;
 
                         if (isSettlement) {
                           const title = isPayer ? "You paid someone" : `@${item.paidByName} paid you`;
@@ -107,8 +107,8 @@ export default function ActivityPage() {
                                   <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "0.2rem" }}>{item.groupName} • {new Date(item.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}</div>
                                 </div>
                               </div>
-                              <div className={`activity-amount ${isCredit ? "positive" : ""}`} style={{ marginLeft: "1rem" }}>
-                                ₹{(item.totalAmount / 100).toFixed(2)}
+                              <div className={`activity-amount ${isCredit ? "positive" : "negative"}`} style={{ marginLeft: "1rem" }}>
+                                {isCredit ? "+" : "-"}₹{(item.totalAmount / 100).toFixed(2)}
                               </div>
                             </li>
                           );
@@ -122,15 +122,15 @@ export default function ActivityPage() {
                                 <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                               </div>
                               <div className="activity-desc" style={{ marginRight: 0 }}>
-                                <div className="activity-title">{title}</div>
-                                <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "0.2rem" }}>{item.groupName} • {new Date(item.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}</div>
+                                  <div className="activity-title">{title}</div>
+                                  <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "0.2rem" }}>{item.groupName} • {new Date(item.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}</div>
+                                </div>
                               </div>
-                            </div>
-                            <div className={`activity-amount ${isCredit ? "positive" : ""}`} style={{ marginLeft: "1rem" }}>
-                              ₹{(item.totalAmount / 100).toFixed(2)}
-                            </div>
-                          </li>
-                        );
+                              <div className={`activity-amount ${isCredit ? "positive" : "negative"}`} style={{ marginLeft: "1rem" }}>
+                                {isCredit ? "+" : "-"}₹{(item.totalAmount / 100).toFixed(2)}
+                              </div>
+                            </li>
+                          );
                       })}
                     </ul>
                   </div>

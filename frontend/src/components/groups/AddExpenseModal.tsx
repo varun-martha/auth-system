@@ -17,7 +17,11 @@ export function AddExpenseModal({ groupId, members, currentUserId, existingExpen
   const [amount, setAmount] = useState(existingExpense ? (existingExpense.totalAmount / 100).toString() : "");
   const [date, setDate] = useState(existingExpense ? existingExpense.date.split("T")[0] : new Date().toISOString().split("T")[0]);
   const [paidById, setPaidById] = useState(existingExpense?.paidById || currentUserId);
-  const [splitMethod, setSplitMethod] = useState<"equal" | "custom" | "percentage">(existingExpense?.splitMethod || "equal");
+  const [splitMethod, setSplitMethod] = useState<"equal" | "custom" | "percentage">(
+    existingExpense?.splitMethod && existingExpense.splitMethod !== "settlement"
+      ? existingExpense.splitMethod
+      : "equal"
+  );
   
   const [customAmounts, setCustomAmounts] = useState<Record<string, string>>(() => {
     if (existingExpense?.splitMethod === "custom") {
